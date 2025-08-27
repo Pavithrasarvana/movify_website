@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movify Packers & Movers</title>
+  <!-- Font Awesome for Social Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <!-- Google Fonts for Catchy Look -->
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@900&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+
+    html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;  /* stops sideways scroll */
+}
+
+    body {
+      background: #f9f9f9;
+      font-family: "Montserrat", Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+    }
+    /* ====== HEADER (unchanged) ====== */
+    header {
+      background: #000;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    .logo h1 {
+      font-size: 1.6rem;
+      font-family: 'Barlow', 'Montserrat', Arial, sans-serif;
+      font-weight: bold;
+      color: #ffcb05;
+      letter-spacing: 1.5px;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    .nav-links li {
+      position: relative;
+      margin-left: 15px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px 18px;
+      position: relative;
+      border-radius: 25px;
+      transition: color 0.3s ease;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .nav-links a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 25px;
+      padding: 2px;
+      background: linear-gradient(90deg, #ffcb05, #ff5733, #2ecc71, #3498db, #ffcb05);
+      background-size: 400%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: borderRun 5s linear infinite;
+    }
+    .nav-links a:hover {
+      color: #ffcb05;
+      transform: scale(1.05);
+    }
+    @keyframes borderRun {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
+    }
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: transparent;
+      min-width: 220px;
+    }
+    .dropdown a {
+      color: #fcfbfb;
+      padding: 10px 15px;
+      display: block;
+      background: #000;
+      margin: 3px 0;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dropdown a:hover {
+      background: #060505;
+      color: #ffcb05;
+      transform: translateX(5px);
+    }
+    .nav-links li:hover .dropdown {
+      display: block;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    @media(max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #000;
+        width: 100%;
+        padding: 1rem 0;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links li {
+        margin: 10px 0;
+      }
+      .menu-toggle {
+        display: block;
+        color: #fff;
+      }
+    }
+
+    /* ====== HERO SLIDER SECTION ====== */
+    .hero-slider-outer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      width: 100%;
+      background: #f9f9f9;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-slider-box {
+     position: relative;
+width: 1000px; /* reduced from 1000px */
+max-width: 97vw;
+min-width: 320px;
+min-height: 500px;
+background: url("home.jpg") no-repeat center center; /* background image */
+background-size: cover; /* makes image fit inside */
+color: #fff;
+border-radius: 44px;
+box-shadow: 0 16px 44px 0 rgba(255,203,5,0.11), 0 2px 32px rgba(0,0,0,0.23);
+padding: 4.5rem 3rem 4.5rem 3rem;
+margin: 2rem auto 2rem auto;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: box-shadow 0.4s, opacity 0.6s;
+z-index: 2;
+border: 6px solid #ffcb05;
+overflow: hidden;
+
+    }
+    .hero-slider-content {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      opacity: 0;
+      display: none;
+      z-index: 3;
+      position: relative;
+      min-height: 300px;
+    }
+    .hero-slider-content.active {
+      opacity: 1;
+      display: block;
+      animation: fadeInBox 0.8s cubic-bezier(0.44,0.63,0.52,1.36);
+    }
+    @keyframes fadeInBox {
+      from { opacity: 0; transform: scale(0.98);}
+      to { opacity: 1; transform: scale(1);}
+    }
+   .hero-slider-content h1,
+.hero-slider-content h2 {
+  font-size: 2.5rem;
+  font-family: 'Barlow', 'Montserrat', Arial, sans-serif;
+  font-weight: 900;
+  margin-bottom: 1.2rem;
+  color: #fff; /* changed from #ffcb05 */
+  letter-spacing: 2px;
+  text-shadow: 1px 2px 12px rgba(0,0,0,0.7); /* stronger shadow for readability */
+  line-height: 1.15;
+}
+
+.hero-slider-content p {
+  font-size: 1.35rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #fff; /* text white */
+  margin-bottom: 2.2rem;
+  line-height: 1.7;
+  font-weight: 700;
+  letter-spacing: 0.19px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7); /* stronger shadow */
+}
+
+    .hero-slider-content .cta-button {
+      background: linear-gradient(90deg, #ffcb05 70%, #ff5733 100%);
+      color: #222;
+      padding: 20px 54px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Barlow', 'Montserrat', Arial, sans-serif;
+      font-weight: 900;
+      box-shadow: 0 2px 14px rgba(255,203,5,0.18);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+      margin-top: 0.7rem;
+      position: relative;
+      z-index: 2;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px #ffe06633;
+    }
+    .hero-slider-content .cta-button:hover {
+      background: linear-gradient(90deg, #ff5733 80%, #ffcb05 100%);
+      color: #fff;
+      transform: scale(1.07);
+    }
+
+    /* ====== Big Truck Animation: Start from outside screen, end at box side, never enters box ====== */
+    .truck-img {
+      position: absolute;
+  width: 56   0px;   /* much bigger trucks */
+       top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Keyframes for truck movement: from screen edge to box edge (not inside the box) */
+    @keyframes truckFromRight {
+      0%   { right: -360px; opacity: 1;}
+      97%  { right: calc(50vw - 410px); opacity: 1;}
+      100% { right: calc(50vw - 410px); opacity: 0;}
+    }
+    @keyframes truckFromLeft {
+      0%   { left: -360px; opacity: 1;}
+      97%  { left: calc(50vw - 410px); opacity: 1;}
+      100% { left: calc(50vw - 410px); opacity: 0;}
+    }
+    @keyframes truckFromBothLeft {
+      0%   { left: -360px; opacity: 1;}
+      97%  { left: calc(50vw - 410px - 60px); opacity: 1;}
+      100% { left: calc(50vw - 410px - 60px); opacity: 0;}
+    }
+    @keyframes truckFromBothRight {
+      0%   { right: -360px; opacity: 1;}
+      97%  { right: calc(50vw - 410px - 60px); opacity: 1;}
+      100% { right: calc(50vw - 410px - 60px); opacity: 0;}
+    }
+
+    /* Animation triggers (applied by JS) */
+    .truck-right.animate {
+      animation: truckFromRight 9.7s linear forwards;
+      opacity: 1;
+    }
+    .truck-left.animate {
+      animation: truckFromLeft 9.7s linear forwards;
+      opacity: 1;
+    }
+    .truck-both.animate {
+      animation: truckFromBothLeft 9.7s linear forwards;
+      opacity: 1;
+    }
+    .truck-both-right.animate {
+      animation: truckFromBothRight 9.7s linear forwards;
+      opacity: 1;
+      transform: scaleX(-1);
+    }
+
+    @media (max-width: 900px) {
+      .hero-slider-box { width: 100%; min-width: 0; }
+      .truck-img { width: 220px; }
+      .hero-slider-content h1, .hero-slider-content h2 { font-size: 1.3rem; }
+      .hero-slider-content p { font-size: 1rem;}
+      .hero-slider-content .cta-button { font-size: 1rem; padding: 12px 16px;}
+    }
+    @media (max-width: 600px) {
+      .truck-img { width: 140px; bottom: 2vw;}
+      .hero-slider-content h1, .hero-slider-content h2 { font-size: 1.1rem; }
+      .hero-slider-content p { font-size: 0.9rem;}
+      .hero-slider-content .cta-button { font-size: 0.9rem; padding: 10px 9px;}
+    }
+
+    /* ====== Footer (unchanged) ====== */
+   footer {
+  background: #000;
+  color: #fff;
+  padding: 8rem 10% 6rem 10%;  /* more inside space */
+  margin-top: 0;             /* remove gap above */
+  min-height: 650px;         /* make footer rectangle taller */
+  width: 100%;               /* full width stretch */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;    /* makes padding count inside size */
+}
+
+   .footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* wider columns */
+  gap: 1rem;
+  align-items: flex-start;
+  max-width: 1800px;   /* makes container wider */
+  margin: 0 auto;      /* centers it */
+  width: 100%;         /* stretches full width */
+}
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.3rem;
+    }
+    .footer-logo img { width: 45px; height: auto;}
+    .footer-logo h3 { color: #ffcb05; font-size: 1.15rem; }
+    .footer-container h3 { margin-bottom: 0.7rem; color: #ffcb05; font-size: 1em;}
+    .footer-container ul { list-style: none; }
+    .footer-container ul li {
+      margin: 6px 0;
+      font-size: 0.78rem;
+      opacity: 0.85;
+      line-height: 1.3;
+    }
+    .footer-container ul li a {
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      position: relative;
+      text-decoration: none;
+      display: inline-block;
+      font-size: inherit;
+    }
+    .footer-container ul li a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      padding: 2px;
+      background: linear-gradient(90deg, #ffcb05, #ff5733, #2ecc71, #3498db, #ffcb05);
+      background-size: 400%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: borderRun 5s linear infinite;
+    }
+    .footer-container ul li a:hover { color: #ffcb05; transform: scale(1.05);}
+    /* Reduce size for service areas */
+    .footer-container .chennai-service-areas,
+    .footer-container .tamilnadu-service-areas,
+    .footer-container .panindia-service-areas {
+      font-size: 0.87em;
+      max-width: 180px;
+      opacity: 0.82;
+    }
+
+    /* Footer Follow Us - with icon, animated border, inline, and for Contact Info*/
+    .footer-follow {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-top: 0.2rem;
+    }
+    .footer-follow h3 { margin-bottom: 0; font-size: 1em;}
+    .footer-follow ul {
+      display: flex;
+      gap: 0.7rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .footer-follow ul li {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    .footer-follow ul li a {
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      position: relative;
+      font-size: 1.17em;
+      background: transparent;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .footer-follow ul li a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      padding: 2px;
+      background: linear-gradient(90deg, #ffcb05, #ff5733, #2ecc71, #3498db, #ffcb05);
+      background-size: 400%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: borderRun 5s linear infinite;
+      z-index: -1;
+    }
+    .footer-follow ul li a:hover {
+      color: #ffcb05;
+      transform: scale(1.08);
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.92rem;
+      border-top: 1px solid rgba(255,255,255,0.18);
+      padding-top: 0.8rem;
+      opacity: 0.8;
+    }
+    /* For Contact Info Socials */
+    .contact-socials {
+      margin-top: 0.7rem;
+    }
+    .contact-socials .footer-follow {
+      margin-top: 0.15rem;
+      margin-bottom: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== HEADER ====== -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="logo1.jpeg" alt="Movify Logo">
+        <h1>Movify Packers & Movers</h1>
+      </div>
+      <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li>
+          <a href="#">Our Services ▾</a>
+          <div class="dropdown">
+            <a href="#">Local Household Shifting</a>
+            <a href="#">Residential & Commercial Moving</a>
+            <a href="#">Long Distance & Service for All Over India</a>
+            <a href="#">24/7 Service Available</a>
+            <a href="#">Office Shifting</a>
+            <a href="#">Packers and Movers</a>
+            <a href="#">Intercity Relocation</a>
+            <a href="#">Furniture Moving</a>
+            <a href="#">Best Packers and Movers in Chennai</a>
+            <a href="#">House Shifting Services</a>
+            <a href="#">Local Packers and Movers</a>
+            <a href="#">Car Transportation</a>
+            <a href="#">Household Goods Shifting</a>
+            <a href="#">Loading and Unloading Services</a>
+            <a href="#">Packing & Unpacking</a>
+            <a href="#">Bike Transport Services</a>
+            <a href="#">Door-to-Door Relocation Services</a>
+          </div>
+        </li>
+        <li>
+          <a href="#">Service Areas ▾</a>
+          <div class="dropdown">
+            <a href="#">Chennai to Villupuram</a>
+            <a href="#">Chennai to Pondy</a>
+            <a href="#">Chennai to Trichy</a>
+            <a href="#">Chennai to Madurai</a>
+            <a href="#">Chennai to Salem</a>
+            <a href="#">Chennai to Bangalore</a>
+            <a href="#">Chennai to Kerala</a>
+            <a href="#">Chennai to Erode</a>
+            <a href="#">Chennai to Karnataka</a>
+            <a href="#">All India Relocation</a>
+          </div>
+        </li>
+        <li><a href="#">Why Us</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ====== HERO SLIDER CENTERED RECTANGLE, TRUCKS MOVE BESIDE BOX ONLY ====== -->
+  <div class="hero-slider-outer">
+    <div class="hero-slider-box">
+      <!-- Slide 1: Truck2.png moves from right to just at box edge -->
+      <div class="hero-slider-content slide1 active">
+        <h1>🚚 Move Easy. Move Secure. Move Happy!</h1>
+        <p>
+          Let Movify Packers & Movers handle every step of your journey.<br>
+          Fast, Safe & Affordable Relocation for Families and Businesses across India.
+        </p>
+        <a href="#" class="cta-button">Get a Free Quote</a>
+      </div>
+      <!-- Slide 2: Truck1.png moves from left to just at box edge -->
+      <div class="hero-slider-content slide2">
+        <h2>📦 We Pack. We Move. You Relax.</h2>
+        <p>
+          From high-quality packing to careful delivery, stress-freeand on time.
+        </p>
+        <a href="#" class="cta-button">Book Your Hassle-Free Move</a>
+      </div>
+      <!-- Slide 3: Truck3.png both sides move in at same time -->
+      <div class="hero-slider-content slide3">
+        <h2 >India Moves with Us!</h2>
+        <p>
+          From Kanyakumari to care to every relocation.
+        </p>
+        <p>Choose the experts for a smooth, safe</span> and affordable</span> move.</p>
+        <a href="#" class="cta-button">Start Your Move Now</a>
+      </div>
+    </div>
+    <!-- TRUCKS OUTSIDE THE BOX -->
+    <img src="truck2.png" alt="Truck from Right" class="truck-img truck-right" style="display:none;">
+    <img src="truck1.png" alt="Truck from Left" class="truck-img truck-left" style="display:none;">
+    <img src="Truck.png" alt="Truck from Left" class="truck-img truck-both" style="display:none;">
+    <img src="Truck.png" alt="Truck from Right" class="truck-img truck-both-right" style="display:none;">
+  </div>
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <div class="footer-logo">
+          <h3>Movify Packers & Movers</h3>
+        </div>
+        <p>Safe, secure, and affordable relocation services across Chennai & all over India.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Services</a></li>
+          <li><a href="#">Service Areas</a></li>
+          <li><a href="#">Why Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="chennai-service-areas">
+        <h3>Chennai Service Areas</h3>
+        <ul>
+          <li><a href="#">Movify Packers and Movers – Anna Nagar</a></li>
+          <li><a href="#">Movify Packers and Movers – Adyar</a></li>
+          <li><a href="#">Movify Packers and Movers – T. Nagar</a></li>
+          <li><a href="#">Movify Packers and Movers – Velachery</a></li>
+          <li><a href="#">Movify Packers and Movers – Tambaram</a></li>
+          <li><a href="#">Movify Packers and Movers – Pallavaram</a></li>
+          <li><a href="#">Movify Packers and Movers – Ambattur</a></li>
+          <li><a href="#">Movify Packers and Movers – Avadi</a></li>
+        </ul>
+      </div>
+      <div class="tamilnadu-service-areas">
+        <h3>Tamil Nadu Service Cities</h3>
+        <ul>
+          <li><a href="#">Movify Packers and Movers – Coimbatore</a></li>
+          <li><a href="#">Movify Packers and Movers – Madurai</a></li>
+          <li><a href="#">Movify Packers and Movers – Salem</a></li>
+          <li><a href="#">Movify Packers and Movers – Tiruchirappalli</a></li>
+          <li><a href="#">Movify Packers and Movers – Vellore</a></li>
+          <li><a href="#">Movify Packers and Movers – Erode</a></li>
+          <li><a href="#">Movify Packers and Movers – Thanjavur</a></li>
+          <li><a href="#">Movify Packers and Movers – Thoothukudi</a></li>
+          <li><a href="#">Movify Packers and Movers – Kanchipuram</a></li>
+        </ul>
+      </div>
+      <div class="panindia-service-areas">
+        <h3>Pan India Service Cities</h3>
+        <ul>
+          <li><a href="#">Movify Packers and Movers – Bangalore, Karnataka</a></li>
+          <li><a href="#">Movify Packers and Movers – Hyderabad, Telangana</a></li>
+          <li><a href="#">Movify Packers and Movers – Pune, Maharashtra</a></li>
+          <li><a href="#">Movify Packers and Movers – Mumbai, Maharashtra</a></li>
+          <li><a href="#">Movify Packers and Movers – Delhi / NCR</a></li>
+          <li><a href="#">Movify Packers and Movers – Jaipur, Rajasthan</a></li>
+          <li><a href="#">Movify Packers and Movers – Kolkata, West Bengal</a></li>
+          <li><a href="#">Movify Packers and Movers – Chandigarh, Punjab</a></li>
+          <li><a href="#">Movify Packers and Movers – Ahmedabad, Gujarat</a></li>
+          <li><a href="#">Movify Packers and Movers – Lucknow, Uttar Pradesh</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Info</h3>
+        <p>Email : <a href="mailto:Contact@movifypackers.in"> Contact@movifypackers.in</a></p>
+        <p>Phone : <a href="tel:+9107550127216"> +91- 75501 27216</a></p>
+        <p>Address : No. 90/1, 5th Street, Kamaraj Nagar, Avadi, Chennai-600071</p>
+        <!-- Socials under contact info -->
+        <div class="contact-socials">
+          <div class="footer-follow">
+            <h3>Follow Us</h3>
+            <ul>
+              <li>
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+              </li>
+              <li>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i> </a>
+              </li>
+              <li>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i> </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Movify Packers & Movers | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector(".nav-links").classList.toggle("active");
+    }
+
+    // HERO SLIDER & TRUCK MOVEMENT - Images move OUTSIDE the box only
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slider-content');
+    const truckRight = document.querySelector('.truck-right');
+    const truckLeft = document.querySelector('.truck-left');
+    const truckBoth = document.querySelector('.truck-both');
+    const truckBothRight = document.querySelector('.truck-both-right');
+
+    function hideAllTrucks() {
+      truckRight.style.display = "none";
+      truckLeft.style.display = "none";
+      truckBoth.style.display = "none";
+      truckBothRight.style.display = "none";
+      truckRight.classList.remove('animate');
+      truckLeft.classList.remove('animate');
+      truckBoth.classList.remove('animate');
+      truckBothRight.classList.remove('animate');
+    }
+    function showSlide(idx) {
+      slides.forEach((slide, i) => slide.classList.remove('active'));
+      slides[idx].classList.add('active');
+      hideAllTrucks();
+      if(idx === 0) {
+        truckRight.style.display = "block";
+        setTimeout(() => truckRight.classList.add('animate'), 200);
+      } else if(idx === 1) {
+        truckLeft.style.display = "block";
+        setTimeout(() => truckLeft.classList.add('animate'), 200);
+      } else if(idx === 2) {
+        truckBoth.style.display = "block";
+        truckBothRight.style.display = "block";
+        setTimeout(() => {
+          truckBoth.classList.add('animate');
+          truckBothRight.classList.add('animate');
+        }, 200);
+      }
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      showSlide(currentSlide);
+      setInterval(nextSlide, 10000); // 10 seconds per slide
+    });
+  </script>
+</body>
+</html>
+
+
